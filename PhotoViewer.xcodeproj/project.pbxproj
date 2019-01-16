@@ -20,6 +20,11 @@
 		853763BB21EF2D9C003A1EEB /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763BA21EF2D9C003A1EEB /* NetworkError.swift */; };
 		853763BD21EF2DC3003A1EEB /* URLParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763BC21EF2DC3003A1EEB /* URLParameterEncoder.swift */; };
 		853763BF21EF2DDF003A1EEB /* JSONParameterEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763BE21EF2DDF003A1EEB /* JSONParameterEncoder.swift */; };
+		853763C221EF2F2A003A1EEB /* EndPointType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C121EF2F2A003A1EEB /* EndPointType.swift */; };
+		853763C421EF2F43003A1EEB /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C321EF2F43003A1EEB /* HTTPMethod.swift */; };
+		853763C621EF2F5F003A1EEB /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C521EF2F5F003A1EEB /* HTTPTask.swift */; };
+		853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C721EF2F75003A1EEB /* NetworkRouter.swift */; };
+		853763CA21EF2F9D003A1EEB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C921EF2F9D003A1EEB /* Router.swift */; };
 		A66780ABD7465310DE5264F0 /* Pods_PhotoViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB93B4654378018BDA1C0ED /* Pods_PhotoViewerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +66,11 @@
 		853763BA21EF2D9C003A1EEB /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		853763BC21EF2DC3003A1EEB /* URLParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLParameterEncoder.swift; sourceTree = "<group>"; };
 		853763BE21EF2DDF003A1EEB /* JSONParameterEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONParameterEncoder.swift; sourceTree = "<group>"; };
+		853763C121EF2F2A003A1EEB /* EndPointType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPointType.swift; sourceTree = "<group>"; };
+		853763C321EF2F43003A1EEB /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		853763C521EF2F5F003A1EEB /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
+		853763C721EF2F75003A1EEB /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
+		853763C921EF2F9D003A1EEB /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		CB8699168756E1FC97A211A9 /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA399019CA8626156B93302 /* Pods-PhotoViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewerUITests.release.xcconfig"; path = "Target Support Files/Pods-PhotoViewerUITests/Pods-PhotoViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD7D1F631465437EF48FEA8A /* Pods_PhotoViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +201,7 @@
 		853763B621EF2C32003A1EEB /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				853763C021EF2EF0003A1EEB /* Service */,
 				853763B721EF2D43003A1EEB /* Encoding */,
 			);
 			path = Networking;
@@ -205,6 +216,18 @@
 				853763BE21EF2DDF003A1EEB /* JSONParameterEncoder.swift */,
 			);
 			path = Encoding;
+			sourceTree = "<group>";
+		};
+		853763C021EF2EF0003A1EEB /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				853763C121EF2F2A003A1EEB /* EndPointType.swift */,
+				853763C321EF2F43003A1EEB /* HTTPMethod.swift */,
+				853763C521EF2F5F003A1EEB /* HTTPTask.swift */,
+				853763C721EF2F75003A1EEB /* NetworkRouter.swift */,
+				853763C921EF2F9D003A1EEB /* Router.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		A4530C892221B0E2D65F562B /* Frameworks */ = {
@@ -443,12 +466,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				853763CA21EF2F9D003A1EEB /* Router.swift in Sources */,
 				853763B921EF2D77003A1EEB /* ParameterEncoder.swift in Sources */,
 				853763BB21EF2D9C003A1EEB /* NetworkError.swift in Sources */,
 				853763BF21EF2DDF003A1EEB /* JSONParameterEncoder.swift in Sources */,
+				853763C621EF2F5F003A1EEB /* HTTPTask.swift in Sources */,
 				8537638321EF0673003A1EEB /* AppDelegate.swift in Sources */,
+				853763C421EF2F43003A1EEB /* HTTPMethod.swift in Sources */,
 				853763BD21EF2DC3003A1EEB /* URLParameterEncoder.swift in Sources */,
+				853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */,
 				853763B221EF0766003A1EEB /* MainCollectionViewController.swift in Sources */,
+				853763C221EF2F2A003A1EEB /* EndPointType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
