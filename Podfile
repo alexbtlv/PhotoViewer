@@ -11,8 +11,7 @@ target 'PhotoViewer' do
   	:project => "PhotoViewer",
   	:target => "PhotoViewer",
   	:keys => [
-    	"UnsplashAccessKey",
-    	"UnsplashSecretKey"
+    	"UnsplashAccessKey"
   	]
   }
   

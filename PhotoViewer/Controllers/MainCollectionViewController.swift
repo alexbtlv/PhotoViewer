@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import UnsplashKit
 
 private let reuseIdentifier = "Cell"
 

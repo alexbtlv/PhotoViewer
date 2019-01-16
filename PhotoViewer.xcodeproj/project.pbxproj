@@ -25,6 +25,9 @@
 		853763C621EF2F5F003A1EEB /* HTTPTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C521EF2F5F003A1EEB /* HTTPTask.swift */; };
 		853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C721EF2F75003A1EEB /* NetworkRouter.swift */; };
 		853763CA21EF2F9D003A1EEB /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763C921EF2F9D003A1EEB /* Router.swift */; };
+		853763CE21EF3D47003A1EEB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763CD21EF3D47003A1EEB /* NetworkManager.swift */; };
+		853763D021EF3E5B003A1EEB /* UnsplashEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */; };
+		853763D221EF4237003A1EEB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D121EF4237003A1EEB /* Photo.swift */; };
 		A66780ABD7465310DE5264F0 /* Pods_PhotoViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB93B4654378018BDA1C0ED /* Pods_PhotoViewerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +74,9 @@
 		853763C521EF2F5F003A1EEB /* HTTPTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPTask.swift; sourceTree = "<group>"; };
 		853763C721EF2F75003A1EEB /* NetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouter.swift; sourceTree = "<group>"; };
 		853763C921EF2F9D003A1EEB /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		853763CD21EF3D47003A1EEB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashEndPoint.swift; sourceTree = "<group>"; };
+		853763D121EF4237003A1EEB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		CB8699168756E1FC97A211A9 /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA399019CA8626156B93302 /* Pods-PhotoViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewerUITests.release.xcconfig"; path = "Target Support Files/Pods-PhotoViewerUITests/Pods-PhotoViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD7D1F631465437EF48FEA8A /* Pods_PhotoViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -184,6 +190,7 @@
 		853763B321EF1C52003A1EEB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				853763D121EF4237003A1EEB /* Photo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -201,6 +208,8 @@
 		853763B621EF2C32003A1EEB /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				853763CC21EF3D06003A1EEB /* End Point */,
+				853763CB21EF3CF5003A1EEB /* Manager */,
 				853763C021EF2EF0003A1EEB /* Service */,
 				853763B721EF2D43003A1EEB /* Encoding */,
 			);
@@ -228,6 +237,22 @@
 				853763C921EF2F9D003A1EEB /* Router.swift */,
 			);
 			path = Service;
+			sourceTree = "<group>";
+		};
+		853763CB21EF3CF5003A1EEB /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				853763CD21EF3D47003A1EEB /* NetworkManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		853763CC21EF3D06003A1EEB /* End Point */ = {
+			isa = PBXGroup;
+			children = (
+				853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */,
+			);
+			path = "End Point";
 			sourceTree = "<group>";
 		};
 		A4530C892221B0E2D65F562B /* Frameworks */ = {
@@ -466,6 +491,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				853763D221EF4237003A1EEB /* Photo.swift in Sources */,
+				853763CE21EF3D47003A1EEB /* NetworkManager.swift in Sources */,
 				853763CA21EF2F9D003A1EEB /* Router.swift in Sources */,
 				853763B921EF2D77003A1EEB /* ParameterEncoder.swift in Sources */,
 				853763BB21EF2D9C003A1EEB /* NetworkError.swift in Sources */,
@@ -476,6 +503,7 @@
 				853763BD21EF2DC3003A1EEB /* URLParameterEncoder.swift in Sources */,
 				853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */,
 				853763B221EF0766003A1EEB /* MainCollectionViewController.swift in Sources */,
+				853763D021EF3E5B003A1EEB /* UnsplashEndPoint.swift in Sources */,
 				853763C221EF2F2A003A1EEB /* EndPointType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
