@@ -28,6 +28,7 @@
 		853763CE21EF3D47003A1EEB /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763CD21EF3D47003A1EEB /* NetworkManager.swift */; };
 		853763D021EF3E5B003A1EEB /* UnsplashEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */; };
 		853763D221EF4237003A1EEB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D121EF4237003A1EEB /* Photo.swift */; };
+		853763D521EF631D003A1EEB /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */; };
 		A66780ABD7465310DE5264F0 /* Pods_PhotoViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB93B4654378018BDA1C0ED /* Pods_PhotoViewerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		853763CD21EF3D47003A1EEB /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashEndPoint.swift; sourceTree = "<group>"; };
 		853763D121EF4237003A1EEB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		CB8699168756E1FC97A211A9 /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA399019CA8626156B93302 /* Pods-PhotoViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewerUITests.release.xcconfig"; path = "Target Support Files/Pods-PhotoViewerUITests/Pods-PhotoViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD7D1F631465437EF48FEA8A /* Pods_PhotoViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -198,6 +200,7 @@
 		853763B421EF1C58003A1EEB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				853763D321EF62F1003A1EEB /* Cells */,
 				8537638621EF0673003A1EEB /* Main.storyboard */,
 				8537638921EF0675003A1EEB /* Assets.xcassets */,
 				8537638B21EF0675003A1EEB /* LaunchScreen.storyboard */,
@@ -253,6 +256,14 @@
 				853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */,
 			);
 			path = "End Point";
+			sourceTree = "<group>";
+		};
+		853763D321EF62F1003A1EEB /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		A4530C892221B0E2D65F562B /* Frameworks */ = {
@@ -472,12 +483,14 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -502,6 +515,7 @@
 				853763C421EF2F43003A1EEB /* HTTPMethod.swift in Sources */,
 				853763BD21EF2DC3003A1EEB /* URLParameterEncoder.swift in Sources */,
 				853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */,
+				853763D521EF631D003A1EEB /* PhotoCollectionViewCell.swift in Sources */,
 				853763B221EF0766003A1EEB /* MainCollectionViewController.swift in Sources */,
 				853763D021EF3E5B003A1EEB /* UnsplashEndPoint.swift in Sources */,
 				853763C221EF2F2A003A1EEB /* EndPointType.swift in Sources */,

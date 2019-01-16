@@ -6,6 +6,7 @@ target 'PhotoViewer' do
   use_frameworks!
 
   # Pods for PhotoViewer
+  pod 'Kingfisher'
   
   plugin 'cocoapods-keys', {
   	:project => "PhotoViewer",

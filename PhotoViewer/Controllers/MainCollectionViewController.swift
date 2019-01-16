@@ -8,23 +8,45 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 class MainCollectionViewController: UICollectionViewController {
 
+    private let reuseIdentifier = "Cell"
+    lazy var networkManager = NetworkManager()
+    var currentPage = 1
+    var isLoadingList : Bool = false
+    var photos = [Photo]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
+        loadPhotos()
     }
 
     fileprivate func configureUI() {
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
     }
     
-    fileprivate func getpics() {
-//        UN
+    fileprivate func loadPhotos() {
+        isLoadingList = true
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.networkManager.getPopularPhotos(page: self.currentPage) { photos, error in
+                if let error = error {
+                    print(error)
+                    self.isLoadingList = false
+                }
+                if let photos = photos {
+                    DispatchQueue.main.async {
+                        self.photos = photos
+                        self.collectionView.reloadData()
+                        self.isLoadingList = false
+                    }
+                }
+            }
+        }
     }
     
     /*
@@ -41,18 +63,18 @@ class MainCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
+        cell.photo = photos[indexPath.row]
         return cell
     }
     

@@ -1,8 +1,14 @@
 PODS:
   - Keys (1.0.1)
+  - Kingfisher (5.1.0)
 
 DEPENDENCIES:
   - Keys (from `Pods/CocoaPodsKeys`)
+  - Kingfisher
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Kingfisher
 
 EXTERNAL SOURCES:
   Keys:
@@ -10,7 +16,8 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Keys: a576f4c9c1c641ca913a959a9c62ed3f215a8de9
+  Kingfisher: fcec238063d17404fca89bf0a850583211c4cbf6
 
-PODFILE CHECKSUM: 6c306bab94f573af622d289e663b2a5baa0026f0
+PODFILE CHECKSUM: 325870b73d98bc1374a2f03737ef95291a67c243
 
 COCOAPODS: 1.6.0.beta.1

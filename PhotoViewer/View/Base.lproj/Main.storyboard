@@ -18,19 +18,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="J99-00-sCx">
-                            <size key="itemSize" width="50" height="50"/>
+                            <size key="itemSize" width="225" height="108"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="xjO-rm-E78">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="xjO-rm-E78" customClass="PhotoCollectionViewCell" customModule="PhotoViewer" customModuleProvider="target">
+                                <rect key="frame" x="75" y="0.0" width="225" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="225" height="108"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-3y-k6n">
+                                            <rect key="frame" x="0.0" y="0.0" width="225" height="108"/>
+                                        </imageView>
+                                    </subviews>
                                 </view>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="Dcl-3y-k6n" secondAttribute="trailing" id="ZG0-WK-Clm"/>
+                                    <constraint firstItem="Dcl-3y-k6n" firstAttribute="top" secondItem="xjO-rm-E78" secondAttribute="top" id="edu-jM-qbR"/>
+                                    <constraint firstAttribute="bottom" secondItem="Dcl-3y-k6n" secondAttribute="bottom" id="qRN-e2-bZ8"/>
+                                    <constraint firstItem="Dcl-3y-k6n" firstAttribute="leading" secondItem="xjO-rm-E78" secondAttribute="leading" id="uQx-qQ-C6R"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="imageView" destination="Dcl-3y-k6n" id="h7N-kT-Oyd"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
