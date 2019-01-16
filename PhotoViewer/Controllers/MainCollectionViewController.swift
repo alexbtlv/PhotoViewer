@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UnsplashKit
 
 private let reuseIdentifier = "Cell"
 
@@ -21,6 +22,10 @@ class MainCollectionViewController: UICollectionViewController {
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+    }
+    
+    fileprivate func getpics() {
+//        UN
     }
     
     /*

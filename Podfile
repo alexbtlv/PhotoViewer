@@ -6,7 +6,7 @@ target 'PhotoViewer' do
   use_frameworks!
 
   # Pods for PhotoViewer
-
+  
   plugin 'cocoapods-keys', {
   	:project => "PhotoViewer",
   	:target => "PhotoViewer",
@@ -14,7 +14,8 @@ target 'PhotoViewer' do
     	"UnsplashAccessKey",
     	"UnsplashSecretKey"
   	]
-  } 
+  }
+  
   target 'PhotoViewerTests' do
     inherit! :search_paths
     # Pods for testing
