@@ -9,7 +9,6 @@
 import UIKit
 
 struct GreedoSizeCalculator {
-    
     private var sizeCache = [IndexPath:CGFloat]()
     private var leftOvers = [CGSize]()
     private var lastIndexPathAdded: IndexPath!

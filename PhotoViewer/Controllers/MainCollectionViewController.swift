@@ -21,10 +21,19 @@ class MainCollectionViewController: UICollectionViewController {
         configureUI()
         loadPhotos()
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        guard let layout = collectionView.collectionViewLayout as? GreedoCollectionViewLayout else {
+            return
+        }
+        layout.invalidateLayout()
+    }
 
     fileprivate func configureUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+        
     }
     
     fileprivate func loadPhotos() {

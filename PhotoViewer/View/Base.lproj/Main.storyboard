@@ -20,14 +20,15 @@
                         <collectionViewLayout key="collectionViewLayout" id="fIT-Wd-dJj" customClass="GreedoCollectionViewLayout" customModule="PhotoViewer" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="xjO-rm-E78" customClass="PhotoCollectionViewCell" customModule="PhotoViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <rect key="frame" x="60.5" y="0.0" width="254" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-3y-k6n">
-                                            <rect key="frame" x="0.0" y="0.0" width="225" height="108"/>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-3y-k6n">
+                                            <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
+                                            <color key="backgroundColor" red="0.0" green="0.80244993050000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -37,6 +38,7 @@
                                     <constraint firstAttribute="bottom" secondItem="Dcl-3y-k6n" secondAttribute="bottom" id="qRN-e2-bZ8"/>
                                     <constraint firstItem="Dcl-3y-k6n" firstAttribute="leading" secondItem="xjO-rm-E78" secondAttribute="leading" id="uQx-qQ-C6R"/>
                                 </constraints>
+                                <size key="customSize" width="254" height="157"/>
                                 <connections>
                                     <outlet property="imageView" destination="Dcl-3y-k6n" id="h7N-kT-Oyd"/>
                                 </connections>
