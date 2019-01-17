@@ -43,7 +43,6 @@ extension Photo: Decodable {
             throw DecodingError.missingThumbURL
         }
         thumbURL = tURL
-        print(thumbURL)
         guard let regular = urls["regular"], let rURL = URL(string: regular) else {
             throw DecodingError.missingRegularURL
         }
