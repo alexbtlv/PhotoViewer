@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search-->
+        <!--Popular-->
         <scene sceneID="UwP-cR-Wnm">
             <objects>
                 <collectionViewController id="Cnb-vd-BNW" customClass="MainCollectionViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
@@ -28,7 +28,6 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dcl-3y-k6n">
                                             <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
-                                            <color key="backgroundColor" red="0.0" green="0.80244993050000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </imageView>
                                     </subviews>
                                 </view>
@@ -49,7 +48,7 @@
                             <outlet property="delegate" destination="Cnb-vd-BNW" id="o0G-yg-o9x"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Search" id="HzW-RS-vrD"/>
+                    <navigationItem key="navigationItem" title="Popular" id="HzW-RS-vrD"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XcB-5p-Uqn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

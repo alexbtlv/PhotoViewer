@@ -12,9 +12,9 @@ class MainCollectionViewController: UICollectionViewController {
 
     private let reuseIdentifier = "Cell"
     lazy var networkManager = NetworkManager()
-    var currentPage = 1
-    var isLoadingList : Bool = false
-    var photos = [Photo]()
+    private var currentPage = 1
+    private var isLoadingList : Bool = false
+    private var photos = [Photo]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MainCollectionViewController: UICollectionViewController {
                 }
                 if let photos = photos {
                     DispatchQueue.main.async {
-                        self.photos = photos
+                        self.photos += photos
                         self.collectionView.reloadData()
                         self.isLoadingList = false
                     }
@@ -77,5 +77,16 @@ extension MainCollectionViewController  {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
         cell.photo = photos[indexPath.row]
         return cell
+    }
+}
+
+// MARK: Scroll View Delegate
+
+extension MainCollectionViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height - 100) > scrollView.contentSize.height ) && !isLoadingList {
+            currentPage += 1
+            loadPhotos()
+        }
     }
 }
