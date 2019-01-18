@@ -31,7 +31,7 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
     
     public override func prepare() {
         if cache.isEmpty {
-            rowMaximumHeight = collectionView!.bounds.height / 4
+            rowMaximumHeight = collectionView!.bounds.height / 5
             height = 30 + 10
             var xOffsets: [CGFloat] = []
             var yOffset: CGFloat = 0

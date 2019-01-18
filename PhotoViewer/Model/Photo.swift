@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreGraphics
 
 public enum DecodingError: String, Error {
     case missingThumbURL = "Missing Thumb image URL"
@@ -19,8 +20,13 @@ public struct Photo {
     let description: String
     let thumbURL: URL
     let regularURL: URL
-    let link: String
-    let likes: Int
+    let source: String
+    let width: Int
+    let height: Int
+    let author: User
+    var aspectRatio: CGFloat {
+        return CGFloat(width) / CGFloat(height)
+    }
 }
 
 
@@ -30,7 +36,9 @@ extension Photo: Decodable {
         case description
         case urls
         case links
-        case likes
+        case width
+        case height
+        case user
     }
     
     public init(from decoder: Decoder) throws {
@@ -43,15 +51,17 @@ extension Photo: Decodable {
             throw DecodingError.missingThumbURL
         }
         thumbURL = tURL
-        guard let regular = urls["regular"], let rURL = URL(string: regular) else {
+        guard let raw = urls["raw"], let rURL = URL(string: raw) else {
             throw DecodingError.missingRegularURL
         }
         regularURL = rURL
         let links = try photoContainer.decode([String:String].self, forKey: .links)
-        guard let webSourceURL = links["self"] else {
+        guard let webSourceURL = links["html"] else {
             throw DecodingError.missingImageURL
         }
-        link = webSourceURL
-        likes = try photoContainer.decode(Int.self, forKey: .likes)
+        source = webSourceURL
+        width = try photoContainer.decode(Int.self, forKey: .width)
+        height = try photoContainer.decode(Int.self, forKey: .height)
+        author = try photoContainer.decode(User.self, forKey: .user)
     }
 }

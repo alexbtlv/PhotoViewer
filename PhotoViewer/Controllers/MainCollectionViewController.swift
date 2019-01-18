@@ -80,6 +80,17 @@ extension MainCollectionViewController  {
     }
 }
 
+// MARK: UICollectionViewDelegate
+
+extension MainCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let stb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let photoDetailVC = stb.instantiateViewController(withIdentifier: "PhotoDetail") as! PhotoDetailViewController
+        photoDetailVC.photo = photos[indexPath.row]
+        present(photoDetailVC, animated: true, completion: nil)
+    }
+}
+
 // MARK: Scroll View Delegate
 
 extension MainCollectionViewController {
