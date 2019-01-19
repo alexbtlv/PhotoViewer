@@ -135,23 +135,23 @@
             </objects>
             <point key="canvasLocation" x="3640.8000000000002" y="-36.431784107946029"/>
         </scene>
-        <!--Collection View Controller-->
+        <!--Search-->
         <scene sceneID="uZy-Bb-VOj">
             <objects>
-                <collectionViewController id="n9b-KZ-b2g" sceneMemberID="viewController">
+                <collectionViewController id="n9b-KZ-b2g" customClass="SearchCollectionViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="PvW-04-VJp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="40C-aN-tca">
+                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Pgn-zX-YGh">
                             <size key="itemSize" width="50" height="50"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="174"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zhp-Ul-bJl">
-                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="zhp-Ul-bJl">
+                                <rect key="frame" x="0.0" y="174" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -159,16 +159,46 @@
                                 </view>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="Header" id="Hq7-RL-lV7" customClass="SearchCollectionHeaderView" customModule="PhotoViewer" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="174"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="3" translatesAutoresizingMaskIntoConstraints="NO" id="vZ0-Rk-bdF">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="174"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhe-Yx-KAE">
+                                    <rect key="frame" x="16" y="153" width="343" height="21"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="vZ0-Rk-bdF" firstAttribute="top" secondItem="Hq7-RL-lV7" secondAttribute="top" id="Hc3-gr-avs"/>
+                                <constraint firstItem="vZ0-Rk-bdF" firstAttribute="leading" secondItem="Hq7-RL-lV7" secondAttribute="leading" id="XNK-Qh-5q4"/>
+                                <constraint firstItem="Yhe-Yx-KAE" firstAttribute="centerX" secondItem="Hq7-RL-lV7" secondAttribute="centerX" id="Ydr-dT-wCb"/>
+                                <constraint firstAttribute="bottom" secondItem="Yhe-Yx-KAE" secondAttribute="bottom" id="gEc-di-x47"/>
+                                <constraint firstAttribute="trailing" secondItem="Yhe-Yx-KAE" secondAttribute="trailing" constant="16" id="nts-ni-Rxr"/>
+                                <constraint firstAttribute="bottom" secondItem="vZ0-Rk-bdF" secondAttribute="bottom" id="qDY-rm-N61"/>
+                                <constraint firstAttribute="trailing" secondItem="vZ0-Rk-bdF" secondAttribute="trailing" id="rde-Tg-oU1"/>
+                                <constraint firstItem="Yhe-Yx-KAE" firstAttribute="leading" secondItem="Hq7-RL-lV7" secondAttribute="leading" constant="16" id="ycN-NK-oZA"/>
+                            </constraints>
+                            <connections>
+                                <outlet property="authorLabel" destination="Yhe-Yx-KAE" id="Vyf-VS-eNN"/>
+                                <outlet property="backgroundImageView" destination="vZ0-Rk-bdF" id="wxg-i5-l0v"/>
+                            </connections>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="n9b-KZ-b2g" id="pD1-Bb-0C7"/>
                             <outlet property="delegate" destination="n9b-KZ-b2g" id="z8c-ai-A4o"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" id="seM-Km-xBL"/>
+                    <navigationItem key="navigationItem" title="Search" id="seM-Km-xBL"/>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8cT-lh-2bP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2566" y="373"/>
+            <point key="canvasLocation" x="2565.5999999999999" y="372.86356821589209"/>
         </scene>
         <!--Popular-->
         <scene sceneID="0eb-Wb-jxE">
@@ -195,6 +225,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="UGb-Qc-vpH" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uco-Bq-Cg8">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
@@ -227,4 +258,7 @@
             <point key="canvasLocation" x="1628" y="373"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="3" width="4344" height="2896"/>
+    </resources>
 </document>

@@ -9,8 +9,10 @@
 import UIKit
 
 class MainCollectionViewController: UICollectionViewController {
-
+    
     private let reuseIdentifier = "Cell"
+    private let scrollOffsetToRequestAdditionalData: CGFloat = 150.0
+    
     lazy var networkManager = NetworkManager()
     private var currentPage = 1
     private var isLoadingList : Bool = false
@@ -91,11 +93,11 @@ extension MainCollectionViewController {
     }
 }
 
-// MARK: Scroll View Delegate
+// MARK: UIScrollViewDelegate
 
 extension MainCollectionViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if ((scrollView.contentOffset.y + scrollView.frame.size.height - 100) > scrollView.contentSize.height ) && !isLoadingList {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height - scrollOffsetToRequestAdditionalData) > scrollView.contentSize.height ) && !isLoadingList {
             currentPage += 1
             loadPhotos()
         }

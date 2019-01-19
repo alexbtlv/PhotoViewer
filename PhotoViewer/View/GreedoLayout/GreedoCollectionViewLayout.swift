@@ -45,7 +45,7 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
                 let rowHeight = rowMaximumHeight
-                let width = columnWidth - (cellPadding * 2)
+                let width = columnWidth - cellPadding
                 let frame = CGRect(x: xOffsets[col], y: yOffset, width: width, height: rowHeight)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.frame = frame
@@ -59,7 +59,7 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
                 }
                 
             }
-            collectionView?.contentInset = UIEdgeInsets(top: 30, left: cellPadding, bottom: 10, right: cellPadding)
+            collectionView?.contentInset = UIEdgeInsets(top: 30, left: cellPadding, bottom: 10, right: 0)
         }
     }
     
