@@ -8,15 +8,12 @@
 
 import UIKit
 
-protocol GreedoLayoutDelegate  {
-    func collectionView(_ collectionView: UICollectionView, widthForItemAtIndexPath indexPath: IndexPath) -> CGFloat
-}
-
 public class GreedoCollectionViewLayout: UICollectionViewLayout {
 
     public var rowMaximumHeight: CGFloat = 50
     public var fixedHeight: Bool = true
     public var cellPadding: CGFloat = 5
+    public var headerHeight: CGFloat = 0
     
     private var cache = [UICollectionViewLayoutAttributes]()
     private var height: CGFloat = 0
@@ -32,21 +29,27 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
     public override func prepare() {
         if cache.isEmpty {
             rowMaximumHeight = collectionView!.bounds.height / 5
-            height = 30 + 10
+            height = 10 + 10 + headerHeight
+            
             var xOffsets: [CGFloat] = []
-            var yOffset: CGFloat = 0
+            var yOffset: CGFloat = headerHeight > 0 ? headerHeight + cellPadding : 0
             let columnWidth = width / 2.0
             var col = 0
-            
             for col in 0..<2 {
-                xOffsets.append(CGFloat(col) * columnWidth)
+                let offset = col == 0 ? cellPadding : 0
+                xOffsets.append((CGFloat(col) * columnWidth) + offset)
             }
-            
+        
+            // cell attributes
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
                 let rowHeight = rowMaximumHeight
-                let width = columnWidth - cellPadding
-                let frame = CGRect(x: xOffsets[col], y: yOffset, width: width, height: rowHeight)
+                let width = columnWidth - cellPadding - cellPadding / 2
+                var xOffset = xOffsets[col]
+                if col > 0 {
+                    xOffset += cellPadding / 2
+                }
+                let frame = CGRect(x: xOffset, y: yOffset, width: width, height: rowHeight)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.frame = frame
                 cache.append(attributes)
@@ -57,9 +60,18 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
                 } else {
                     col += 1
                 }
-                
             }
-            collectionView?.contentInset = UIEdgeInsets(top: 30, left: cellPadding, bottom: 10, right: 0)
+            
+            // header attributes
+            if headerHeight > 0 {
+                let attributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, with: IndexPath(item: 0, section: 0))
+                attributes.frame = CGRect(x: 0, y: -150, width: width, height: headerHeight + 150)
+                cache.append(attributes)
+            }
+            collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
+            if headerHeight > 0 {
+                collectionView?.contentInset.bottom += 50
+            }
         }
     }
     
@@ -71,6 +83,15 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
             }
         }
         return layoutAttributes
+    }
+    
+    public override func layoutAttributesForSupplementaryView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        for attributes in cache {
+            if attributes.representedElementKind == elementKind {
+                return attributes
+            }
+        }
+        return nil
     }
     
     public override func invalidateLayout() {

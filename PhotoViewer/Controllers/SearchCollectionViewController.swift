@@ -10,9 +10,11 @@ import UIKit
 
 class SearchCollectionViewController: UICollectionViewController {
     
+    private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     private let reuseIdentifier = "PhotoCell"
-    private var isLoadingList : Bool = false
-    private var currentPage = 1
+    public var isLoadingList : Bool = false
+    public var currentPage = 1
+    public var currentQuery = ""
     lazy var networkManager = NetworkManager()
     public var photos = [Photo]()
     
@@ -21,17 +23,30 @@ class SearchCollectionViewController: UICollectionViewController {
         configureUI()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-//    }
-//
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        guard let layout = collectionView.collectionViewLayout as? GreedoCollectionViewLayout else {
+            return
+        }
+        layout.invalidateLayout()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     fileprivate func configureUI() {
+        guard let layout = collectionView.collectionViewLayout as? GreedoCollectionViewLayout else {
+            return
+        }
+        layout.headerHeight = view.bounds.height / 3
+        let headerNib = UINib(nibName: "SearchHeader", bundle: Bundle.main)
+        collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.singleTap(sender:)))
@@ -61,8 +76,15 @@ class SearchCollectionViewController: UICollectionViewController {
             }
             self.networkManager.searchForPhotos(withQuery: query, page: self.currentPage, completion: { (photos, error) in
                 if let error = error {
-                    print(error)
-                    self.isLoadingList = false
+                    DispatchQueue.main.async {
+                        self.photos = []
+                        self.collectionView.reloadData()
+                        self.isLoadingList = false
+                        let alert = UIAlertController(title: "Oops", message: error, preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        alert.addAction(okAction)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
                 if let photos = photos {
                     DispatchQueue.main.async {
@@ -89,8 +111,8 @@ extension SearchCollectionViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .white
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
+        cell.photo = photos[indexPath.row]
         return cell
     }
     
@@ -100,23 +122,25 @@ extension SearchCollectionViewController {
             
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? SearchCollectionHeaderView else { fatalError("Invalid view type") }
-            let backgrounds: [String: String] = [
-                "1":"Photo by Ishan @seefromthesky on Unsplash",
-                "2":"Photo by Adam Azim on Unsplash",
-                "3":"Photo by Sebastian Pena Lambarri on Unsplash"
-            ]
-            let element = backgrounds.randomElement()!
-            headerView.backgroundImageView.image = UIImage(named: element.key)
-            headerView.authorLabel.text = element.value
+            headerView.backgroundImageView.clipsToBounds = true
+//            let backgrounds: [String: String] = [
+//                "1":"Photo by Ishan @seefromthesky on Unsplash",
+//                "2":"Photo by Adam Azim on Unsplash",
+//                "3":"Photo by Sebastian Pena Lambarri on Unsplash"
+//            ]
+//            let element = backgrounds.randomElement()!
+//            headerView.backgroundImageView.image = UIImage(named: element.key)
+//            headerView.authorLabel.text = element.value
             headerView.visualEffectView.layer.cornerRadius = 10
             headerView.visualEffectView.clipsToBounds = true
             headerView.searchBar.tintColor = .white
+            headerView.searchBar.delegate = self
             UITextField.appearance(whenContainedInInstancesOf: [type(of: headerView.searchBar)]).tintColor = .white
             if let textfield = headerView.searchBar.value(forKey: "searchField") as? UITextField {
                 textfield.backgroundColor = .white
                 textfield.attributedPlaceholder = NSAttributedString(string: textfield.placeholder ?? "", attributes: [NSAttributedString.Key.foregroundColor : UIColor.white])
                 textfield.textColor = .white
-                
+
                 if let leftView = textfield.leftView as? UIImageView {
                     leftView.image = leftView.image?.withRenderingMode(.alwaysTemplate)
                     leftView.tintColor = .white
@@ -129,11 +153,14 @@ extension SearchCollectionViewController {
     }
 }
 
-// MARK: UICollectionViewDelegateFlowLayout
+// MARK: UICollectionViewDelegate
 
-extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: view.bounds.width, height: view.bounds.height / 3)
+extension SearchCollectionViewController {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let stb = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let photoDetailVC = stb.instantiateViewController(withIdentifier: "PhotoDetail") as! PhotoDetailViewController
+        photoDetailVC.photo = photos[indexPath.row]
+        present(photoDetailVC, animated: true, completion: nil)
     }
 }
 
@@ -151,5 +178,18 @@ extension SearchCollectionViewController: UISearchBarDelegate {
         photos = []
         searchPhotosWith(query)
         resetSearchBar()
+        currentQuery = query
+    }
+}
+
+// MARK: UIScrollViewDelegate
+
+extension SearchCollectionViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if ((scrollView.contentOffset.y + scrollView.frame.size.height - scrollOffsetToRequestAdditionalData) > scrollView.contentSize.height ) && !isLoadingList && !photos.isEmpty {
+            currentPage += 1
+            searchPhotosWith(currentQuery)
+            print("load more")
+        }
     }
 }

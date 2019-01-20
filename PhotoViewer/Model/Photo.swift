@@ -17,7 +17,7 @@ public enum DecodingError: String, Error {
 
 public struct Photo {
     let id: String
-    let description: String
+    let description: String?
     let thumbURL: URL
     let regularURL: URL
     let source: String
@@ -47,11 +47,11 @@ extension Photo: Decodable {
         id = try photoContainer.decode(String.self, forKey: .id)
         description = try photoContainer.decode(String.self, forKey: .description)
         let urls = try photoContainer.decode([String:String].self, forKey: .urls)
-        guard let thumb = urls["thumb"], let tURL = URL(string: thumb) else {
+        guard let thumb = urls["small"], let tURL = URL(string: thumb) else {
             throw DecodingError.missingThumbURL
         }
         thumbURL = tURL
-        guard let raw = urls["raw"], let rURL = URL(string: raw) else {
+        guard let raw = urls["full"], let rURL = URL(string: raw) else {
             throw DecodingError.missingRegularURL
         }
         regularURL = rURL

@@ -20,6 +20,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func updateUI() {
+        imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: photo.thumbURL)
         imageView.kf.indicatorType = .activity
     }

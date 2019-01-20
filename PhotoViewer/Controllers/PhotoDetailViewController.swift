@@ -25,7 +25,12 @@ class PhotoDetailViewController: UIViewController {
         configureUI()
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     fileprivate func configureUI() {
+        
         UIView.animate(withDuration: 0.5) {
             let width = self.view.bounds.width
             let height = width / self.photo.aspectRatio
@@ -34,7 +39,16 @@ class PhotoDetailViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
         imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: photo.regularURL)
+        ImageCache.default.retrieveImage(forKey: photo.thumbURL.absoluteString) { result in
+            switch result {
+            case .success(let thumb):
+                self.imageView.kf.setImage(with: self.photo.regularURL, placeholder: thumb.image)
+            case .failure(let error):
+                print(error)
+                self.imageView.backgroundColor = .white
+                self.imageView.kf.setImage(with: self.photo.regularURL)
+            }
+        }
         authorImageView.kf.setImage(with: photo.author.profileImageURL)
         authorLabel.text = photo.author.name
         sourceLabel.text = photo.source

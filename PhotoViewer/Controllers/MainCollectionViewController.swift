@@ -11,7 +11,7 @@ import UIKit
 class MainCollectionViewController: UICollectionViewController {
     
     private let reuseIdentifier = "Cell"
-    private let scrollOffsetToRequestAdditionalData: CGFloat = 150.0
+    private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     
     lazy var networkManager = NetworkManager()
     private var currentPage = 1
@@ -65,13 +65,11 @@ class MainCollectionViewController: UICollectionViewController {
 
 extension MainCollectionViewController  {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return photos.count
     }
     
