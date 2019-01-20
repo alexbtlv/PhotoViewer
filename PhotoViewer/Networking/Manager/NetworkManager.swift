@@ -53,6 +53,35 @@ struct NetworkManager {
         }
     }
     
+    func searchForPhotos(withQuery query: String, page: Int, offset: Int = 10, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
+        router.request(.searchForPhotosWithQuery(query: query, page: page, offset: offset)) { (data, response, error) in
+            if error != nil {
+                completion(nil, "Please check your network connection.")
+            }
+            
+            if let response = response as? HTTPURLResponse {
+                let result = self.handleNetworkResponse(response)
+                switch result {
+                case .success:
+                    guard let responseData = data else {
+                        completion(nil, NetworkResponse.noData.rawValue)
+                        return
+                    }
+                    do {
+                        let json = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.allowFragments)
+                        print(json)
+                        let apiResponse = try JSONDecoder().decode(UnsplashSearchResults.self, from: responseData)
+                        completion(apiResponse.results,nil)
+                    } catch {
+                        completion(nil, NetworkResponse.unableToDecode.rawValue)
+                    }
+                case .failure(let networkFailureError):
+                    completion(nil, networkFailureError)
+                }
+            }
+        }
+    }
+    
     fileprivate func handleNetworkResponse(_ response: HTTPURLResponse) -> Result<String>{
         switch response.statusCode {
         case 200...299: return .success

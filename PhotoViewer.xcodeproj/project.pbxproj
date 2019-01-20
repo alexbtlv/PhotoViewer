@@ -14,6 +14,7 @@
 		850B446B21F1B883007E156E /* RoundedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B446A21F1B883007E156E /* RoundedImageView.swift */; };
 		850B446E21F1C008007E156E /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850B446D21F1C008007E156E /* SearchCollectionViewController.swift */; };
 		852C6BD821F386BC00C927C3 /* SearchCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C6BD721F386BC00C927C3 /* SearchCollectionHeaderView.swift */; };
+		852C6BDA21F4943B00C927C3 /* UnsplashSearchResults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852C6BD921F4943B00C927C3 /* UnsplashSearchResults.swift */; };
 		8537638321EF0673003A1EEB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8537638221EF0673003A1EEB /* AppDelegate.swift */; };
 		8537638821EF0673003A1EEB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8537638621EF0673003A1EEB /* Main.storyboard */; };
 		8537638A21EF0675003A1EEB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8537638921EF0675003A1EEB /* Assets.xcassets */; };
@@ -65,6 +66,7 @@
 		850B446A21F1B883007E156E /* RoundedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedImageView.swift; sourceTree = "<group>"; };
 		850B446D21F1C008007E156E /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		852C6BD721F386BC00C927C3 /* SearchCollectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionHeaderView.swift; sourceTree = "<group>"; };
+		852C6BD921F4943B00C927C3 /* UnsplashSearchResults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashSearchResults.swift; sourceTree = "<group>"; };
 		8537637F21EF0673003A1EEB /* PhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8537638221EF0673003A1EEB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8537638721EF0673003A1EEB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 			children = (
 				853763D121EF4237003A1EEB /* Photo.swift */,
 				850B446821F1A09E007E156E /* User.swift */,
+				852C6BD921F4943B00C927C3 /* UnsplashSearchResults.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				853763D221EF4237003A1EEB /* Photo.swift in Sources */,
+				852C6BDA21F4943B00C927C3 /* UnsplashSearchResults.swift in Sources */,
 				853763CE21EF3D47003A1EEB /* NetworkManager.swift in Sources */,
 				85895B6D21F0657500B0A40B /* GreedoSizeCalculator.swift in Sources */,
 				853763CA21EF2F9D003A1EEB /* Router.swift in Sources */,

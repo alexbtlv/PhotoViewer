@@ -11,7 +11,9 @@ import UIKit
 class SearchCollectionViewController: UICollectionViewController {
     
     private let reuseIdentifier = "PhotoCell"
-    
+    private var isLoadingList : Bool = false
+    private var currentPage = 1
+    lazy var networkManager = NetworkManager()
     public var photos = [Photo]()
     
     override func viewDidLoad() {
@@ -39,15 +41,39 @@ class SearchCollectionViewController: UICollectionViewController {
         self.view.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
-     // MARK: Action handlers
+    // MARK: Action handlers
     
     @objc func singleTap(sender: UITapGestureRecognizer) {
+        resetSearchBar()
+    }
+    
+    fileprivate func resetSearchBar() {
         guard let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as? SearchCollectionHeaderView else { return }
         header.searchBar.text = ""
         header.searchBar.resignFirstResponder()
     }
     
-
+    fileprivate func searchPhotosWith(_ query: String) {
+        isLoadingList = true
+        DispatchQueue.global().async { [weak self] in
+            guard let self = self else {
+                return
+            }
+            self.networkManager.searchForPhotos(withQuery: query, page: self.currentPage, completion: { (photos, error) in
+                if let error = error {
+                    print(error)
+                    self.isLoadingList = false
+                }
+                if let photos = photos {
+                    DispatchQueue.main.async {
+                        self.photos += photos
+                        self.collectionView.reloadData()
+                        self.isLoadingList = false
+                    }
+                }
+            })
+        }
+    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -59,7 +85,7 @@ extension SearchCollectionViewController {
     
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 50
+        return photos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -114,5 +140,16 @@ extension SearchCollectionViewController: UICollectionViewDelegateFlowLayout {
 // MARK: UISearchBarDelegate
 
 extension SearchCollectionViewController: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, !query.isEmpty else {
+            let alert = UIAlertController(title: "Oops", message: "Please enter search term", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alert.addAction(okAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        photos = []
+        searchPhotosWith(query)
+        resetSearchBar()
+    }
 }

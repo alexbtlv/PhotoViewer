@@ -11,11 +11,17 @@ import Keys
 
 public enum UnsplashApi {
     case popularPhotos(page: Int, offset: Int)
+    case searchForPhotosWithQuery(query: String, page: Int, offset: Int)
 }
 
 extension UnsplashApi: EndPointType {
     var path: String {
-        return "photos"
+        switch self {
+        case .popularPhotos:
+            return "photos"
+        case .searchForPhotosWithQuery:
+            return "search/photos"
+        }
     }
     
     var environmentBaseURL : String {
@@ -36,13 +42,18 @@ extension UnsplashApi: EndPointType {
     }
     
     var task: HTTPTask {
+        let keys = PhotoViewerKeys()
         switch self {
         case .popularPhotos(let page, let offset):
-            let keys = PhotoViewerKeys()
             return .requestParameters(bodyParameters: nil, urlParameters: ["order_by":"popular",
                                                                            "page":page,
                                                                            "per_page":offset,
                                                                            "client_id":keys.unsplashAccessKey])
+        case .searchForPhotosWithQuery(let query, let page, let offset):
+            return .requestParameters(bodyParameters: nil, urlParameters: [ "query":query,
+                                                                            "page":page,
+                                                                            "per_page":offset,
+                                                                            "client_id":keys.unsplashAccessKey])
         }
     }
 }
