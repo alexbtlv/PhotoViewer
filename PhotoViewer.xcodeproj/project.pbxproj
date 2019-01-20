@@ -146,7 +146,6 @@
 			isa = PBXGroup;
 			children = (
 				850B446A21F1B883007E156E /* RoundedImageView.swift */,
-				852C6BD721F386BC00C927C3 /* SearchCollectionHeaderView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -289,6 +288,7 @@
 		853763D321EF62F1003A1EEB /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				852C6BD721F386BC00C927C3 /* SearchCollectionHeaderView.swift */,
 				853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */,
 			);
 			path = Cells;

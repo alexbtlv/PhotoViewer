@@ -10,6 +10,8 @@ import UIKit
 
 class SearchCollectionHeaderView: UICollectionReusableView {
     
+    @IBOutlet weak var visualEffectView: UIVisualEffectView!
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var backgroundImageView: UIImageView!
     @IBOutlet weak var authorLabel: UILabel!
     
