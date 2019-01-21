@@ -30,13 +30,11 @@ class DetailViewPresentingTransitionManager: NSObject, UIViewControllerAnimatedT
             else {
                 return
         }
-        
         let containerView = transitionContext.containerView
         let finalFrame = transitionContext.finalFrame(for: toVC)
         snapshot.frame = originFrame
         snapshot.alpha = 0
         photoSnapshot.frame = originFrame
-        photoSnapshot.alpha = 0
         
         containerView.addSubview(toVC.view)
         containerView.addSubview(snapshot)

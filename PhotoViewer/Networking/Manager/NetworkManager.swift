@@ -26,7 +26,7 @@ enum Result<String>{
 struct NetworkManager {
     private let router = Router<UnsplashApi>()
     
-    func getPopularPhotos(page: Int, offset: Int = 20, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
+    func getPopularPhotos(page: Int, offset: Int = 10, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
         router.request(.popularPhotos(page: page, offset: offset)) { data, response, error in
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -41,9 +41,11 @@ struct NetworkManager {
                         return
                     }
                     do {
-                        let apiResponse = try JSONDecoder().decode([Photo].self, from: responseData)
-                        completion(apiResponse,nil)
+                        let apiResponse = try JSONDecoder().decode(FailableCodableArray<Photo>.self, from: responseData)
+                        completion(apiResponse.elements,nil)
                     } catch {
+                        let json = try! JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.mutableContainers)
+                        print(json)
                         completion(nil, NetworkResponse.unableToDecode.rawValue)
                     }
                 case .failure(let networkFailureError):
@@ -53,7 +55,7 @@ struct NetworkManager {
         }
     }
     
-    func searchForPhotos(withQuery query: String, page: Int, offset: Int = 20, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
+    func searchForPhotos(withQuery query: String, page: Int, offset: Int = 10, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
         router.request(.searchForPhotosWithQuery(query: query, page: page, offset: offset)) { (data, response, error) in
             if error != nil {
                 completion(nil, "Please check your network connection.")
@@ -68,8 +70,6 @@ struct NetworkManager {
                         return
                     }
                     do {
-//                        let json = try JSONSerialization.jsonObject(with: responseData, options: JSONSerialization.ReadingOptions.allowFragments)
-//                        print(json)
                         let apiResponse = try JSONDecoder().decode(UnsplashSearchResults.self, from: responseData)
                         completion(apiResponse.results,nil)
                     } catch {

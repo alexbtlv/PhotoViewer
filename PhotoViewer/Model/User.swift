@@ -14,7 +14,7 @@ public struct User {
     let profileImageURL: URL
 }
 
-extension User: Decodable {
+extension User: Codable {
     enum UserCodingKeys: String, CodingKey {
         case id
         case name

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class MainCollectionViewController: UICollectionViewController {
     
@@ -15,7 +16,15 @@ class MainCollectionViewController: UICollectionViewController {
     private var originFrame: CGRect = CGRect.zero
     lazy var networkManager = NetworkManager()
     private var currentPage = 1
-    private var isLoadingList : Bool = false
+    private var isLoadingList : Bool = false {
+        didSet {
+            if isLoadingList {
+                MBProgressHUD.showAdded(to: view, animated: true)
+            } else {
+                MBProgressHUD.hide(for: view, animated: true)
+            }
+        }
+    }
     private var photos = [Photo]()
     private var selectedPhoto: Photo?
     
@@ -47,8 +56,13 @@ class MainCollectionViewController: UICollectionViewController {
             }
             self.networkManager.getPopularPhotos(page: self.currentPage) { photos, error in
                 if let error = error {
-                    print(error)
-                    self.isLoadingList = false
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Oops", message: error, preferredStyle: .alert)
+                        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+                        alert.addAction(okAction)
+                        self.isLoadingList = false
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
                 if let photos = photos {
                     DispatchQueue.main.async {

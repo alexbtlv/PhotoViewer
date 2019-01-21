@@ -41,7 +41,6 @@ class DetailViewDismissingTransitionManager: NSObject, UIViewControllerAnimatedT
         UIView.animate(withDuration: duration, animations: {
             snapshot.frame = CGRect(x: self.destinationFrame.minX, y: self.destinationFrame.midY, width: self.destinationFrame.width, height: 0)
             photoSnapshot.frame = self.destinationFrame
-            photoSnapshot.alpha = 0
             snapshot.alpha = 0
         }) {_ in
             fromVC.view.isHidden = false

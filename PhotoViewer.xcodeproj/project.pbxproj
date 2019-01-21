@@ -38,6 +38,7 @@
 		853763D521EF631D003A1EEB /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */; };
 		8566706121F59B46000B480F /* DetailViewPresentingTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706021F59B46000B480F /* DetailViewPresentingTransitionManager.swift */; };
 		8566706321F5BF32000B480F /* DetailViewDismissingTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706221F5BF32000B480F /* DetailViewDismissingTransitionManager.swift */; };
+		8566706521F6021B000B480F /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706421F6021B000B480F /* FailableCodableArray.swift */; };
 		85895B6B21F05E9400B0A40B /* GreedoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */; };
 		85895B6D21F0657500B0A40B /* GreedoSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */; };
 		85F86FDF21F4DAD4005C3D2D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F86FDE21F4DAD4005C3D2D /* GradientView.swift */; };
@@ -100,6 +101,7 @@
 		853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		8566706021F59B46000B480F /* DetailViewPresentingTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresentingTransitionManager.swift; sourceTree = "<group>"; };
 		8566706221F5BF32000B480F /* DetailViewDismissingTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDismissingTransitionManager.swift; sourceTree = "<group>"; };
+		8566706421F6021B000B480F /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
 		85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoCollectionViewLayout.swift; sourceTree = "<group>"; };
 		85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoSizeCalculator.swift; sourceTree = "<group>"; };
 		85F86FDE21F4DAD4005C3D2D /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				853763D121EF4237003A1EEB /* Photo.swift */,
 				850B446821F1A09E007E156E /* User.swift */,
 				852C6BD921F4943B00C927C3 /* UnsplashSearchResults.swift */,
+				8566706421F6021B000B480F /* FailableCodableArray.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-PhotoViewer/Pods-PhotoViewer-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Keys/Keys.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -552,6 +556,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Keys.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -575,6 +580,7 @@
 				850B446721F19BFB007E156E /* PhotoDetailViewController.swift in Sources */,
 				850B446E21F1C008007E156E /* SearchCollectionViewController.swift in Sources */,
 				853763BF21EF2DDF003A1EEB /* JSONParameterEncoder.swift in Sources */,
+				8566706521F6021B000B480F /* FailableCodableArray.swift in Sources */,
 				853763C621EF2F5F003A1EEB /* HTTPTask.swift in Sources */,
 				8566706121F59B46000B480F /* DetailViewPresentingTransitionManager.swift in Sources */,
 				8537638321EF0673003A1EEB /* AppDelegate.swift in Sources */,

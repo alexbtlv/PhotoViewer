@@ -7,6 +7,7 @@ target 'PhotoViewer' do
 
   # Pods for PhotoViewer
   pod 'Kingfisher'
+  pod 'MBProgressHUD'
   
   plugin 'cocoapods-keys', {
   	:project => "PhotoViewer",

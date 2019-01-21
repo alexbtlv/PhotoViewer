@@ -17,10 +17,10 @@ public enum DecodingError: String, Error {
 
 public struct Photo {
     let id: String
-    let description: String?
+    let description: String
     let thumbURL: URL
     let regularURL: URL
-    let source: String
+    let source: String?
     let width: Int
     let height: Int
     let author: User
@@ -30,7 +30,7 @@ public struct Photo {
 }
 
 
-extension Photo: Decodable {
+extension Photo: Codable {
     enum PhotoCodingKeys: String, CodingKey {
         case id
         case description

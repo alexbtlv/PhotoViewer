@@ -7,18 +7,27 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class SearchCollectionViewController: UICollectionViewController {
     
     private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     private let reuseIdentifier = "PhotoCell"
     private var originFrame: CGRect = CGRect.zero
-    public var isLoadingList : Bool = false
     public var currentPage = 1
     public var currentQuery = ""
     lazy var networkManager = NetworkManager()
     public var photos = [Photo]()
     private var selectedPhoto: Photo?
+    private var isLoadingList : Bool = false {
+        didSet {
+            if isLoadingList {
+                MBProgressHUD.showAdded(to: view, animated: true)
+            } else {
+                MBProgressHUD.hide(for: view, animated: true)
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,14 +134,6 @@ extension SearchCollectionViewController {
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath) as? SearchCollectionHeaderView else { fatalError("Invalid view type") }
             headerView.backgroundImageView.clipsToBounds = true
-//            let backgrounds: [String: String] = [
-//                "1":"Photo by Ishan @seefromthesky on Unsplash",
-//                "2":"Photo by Adam Azim on Unsplash",
-//                "3":"Photo by Sebastian Pena Lambarri on Unsplash"
-//            ]
-//            let element = backgrounds.randomElement()!
-//            headerView.backgroundImageView.image = UIImage(named: element.key)
-//            headerView.authorLabel.text = element.value
             headerView.visualEffectView.layer.cornerRadius = 10
             headerView.visualEffectView.clipsToBounds = true
             headerView.searchBar.tintColor = .white
