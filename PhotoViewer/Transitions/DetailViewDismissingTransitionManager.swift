@@ -38,10 +38,19 @@ class DetailViewDismissingTransitionManager: NSObject, UIViewControllerAnimatedT
         
         let duration = transitionDuration(using: transitionContext)
         
-        UIView.animate(withDuration: duration, animations: {
-            snapshot.frame = CGRect(x: self.destinationFrame.minX, y: self.destinationFrame.midY, width: self.destinationFrame.width, height: 0)
-            photoSnapshot.frame = self.destinationFrame
-            snapshot.alpha = 0
+        
+        UIView.animateKeyframes(withDuration: duration, delay: 0, options: .calculationModeCubic, animations: {
+            
+            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: 2/3) {
+                snapshot.frame = CGRect(x: self.destinationFrame.minX, y: self.destinationFrame.midY, width: self.destinationFrame.width, height: 0)
+                photoSnapshot.frame = self.destinationFrame
+                snapshot.alpha = 0
+            }
+            
+            UIView.addKeyframe(withRelativeStartTime: 2/3, relativeDuration: 1/3) {
+                photoSnapshot.alpha = 0
+            }
+            
         }) {_ in
             fromVC.view.isHidden = false
             snapshot.removeFromSuperview()

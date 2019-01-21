@@ -19,6 +19,7 @@ class SearchCollectionViewController: UICollectionViewController {
     lazy var networkManager = NetworkManager()
     public var photos = [Photo]()
     private var selectedPhoto: Photo?
+    private var selectedIndexPath: IndexPath?
     private var isLoadingList : Bool = false {
         didSet {
             if isLoadingList {
@@ -166,6 +167,7 @@ extension SearchCollectionViewController {
         let cellRect = attributes!.frame
         originFrame = collectionView.convert(cellRect, to: view)
         selectedPhoto = photos[indexPath.row]
+        selectedIndexPath = indexPath
         photoDetailVC.transitioningDelegate = self
         photoDetailVC.photo = selectedPhoto!
         photoDetailVC.originFrame = originFrame
@@ -206,8 +208,8 @@ extension SearchCollectionViewController {
 
 extension SearchCollectionViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let photo = selectedPhoto else { return nil }
-        return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio)
+        guard let photo = selectedPhoto, let indexPath = selectedIndexPath else { return nil }
+        return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio, indexPath: indexPath)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {

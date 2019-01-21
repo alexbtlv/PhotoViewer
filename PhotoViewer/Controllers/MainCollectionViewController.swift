@@ -27,6 +27,7 @@ class MainCollectionViewController: UICollectionViewController {
     }
     private var photos = [Photo]()
     private var selectedPhoto: Photo?
+    private var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,6 +106,7 @@ extension MainCollectionViewController {
         let cellRect = attributes!.frame
         originFrame = collectionView.convert(cellRect, to: view)
         selectedPhoto = photos[indexPath.row]
+        selectedIndexPath = indexPath
         photoDetailVC.transitioningDelegate = self
         photoDetailVC.photo = photos[indexPath.row]
         photoDetailVC.originFrame = originFrame
@@ -128,8 +130,8 @@ extension MainCollectionViewController {
 
 extension MainCollectionViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        guard let photo = selectedPhoto else { return nil }
-        return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio)
+        guard let photo = selectedPhoto, let indexPath = selectedIndexPath else { return nil }
+        return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio, indexPath: indexPath)
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
