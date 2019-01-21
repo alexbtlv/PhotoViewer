@@ -196,7 +196,7 @@ extension SearchCollectionViewController: UISearchBarDelegate {
     }
 }
 
-// MARK: UIScrollViewDelegate
+// MARK: UIScrollViewDelegate 
 
 extension SearchCollectionViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -216,6 +216,14 @@ extension SearchCollectionViewController: UIViewControllerTransitioningDelegate 
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return DetailViewDismissingTransitionManager(destinationFrame: originFrame)
+        guard let revealVC = dismissed as? PhotoDetailViewController else {
+            return nil
+        }
+        return DetailViewDismissingTransitionManager(destinationFrame: originFrame, interactionController: revealVC.swipeInteractionController)
+    }
+    
+    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let animator = animator as? DetailViewDismissingTransitionManager, let interactionController = animator.interactionController, interactionController.interactionInProgress else { return nil }
+        return interactionController
     }
 }

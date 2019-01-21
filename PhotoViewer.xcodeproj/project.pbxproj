@@ -39,6 +39,7 @@
 		8566706121F59B46000B480F /* DetailViewPresentingTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706021F59B46000B480F /* DetailViewPresentingTransitionManager.swift */; };
 		8566706321F5BF32000B480F /* DetailViewDismissingTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706221F5BF32000B480F /* DetailViewDismissingTransitionManager.swift */; };
 		8566706521F6021B000B480F /* FailableCodableArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706421F6021B000B480F /* FailableCodableArray.swift */; };
+		8566706A21F626AF000B480F /* SwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706921F626AF000B480F /* SwipeInteractionController.swift */; };
 		85895B6B21F05E9400B0A40B /* GreedoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */; };
 		85895B6D21F0657500B0A40B /* GreedoSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */; };
 		85F86FDF21F4DAD4005C3D2D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F86FDE21F4DAD4005C3D2D /* GradientView.swift */; };
@@ -102,6 +103,7 @@
 		8566706021F59B46000B480F /* DetailViewPresentingTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewPresentingTransitionManager.swift; sourceTree = "<group>"; };
 		8566706221F5BF32000B480F /* DetailViewDismissingTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewDismissingTransitionManager.swift; sourceTree = "<group>"; };
 		8566706421F6021B000B480F /* FailableCodableArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailableCodableArray.swift; sourceTree = "<group>"; };
+		8566706921F626AF000B480F /* SwipeInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeInteractionController.swift; sourceTree = "<group>"; };
 		85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoCollectionViewLayout.swift; sourceTree = "<group>"; };
 		85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoSizeCalculator.swift; sourceTree = "<group>"; };
 		85F86FDE21F4DAD4005C3D2D /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 			children = (
 				8566706021F59B46000B480F /* DetailViewPresentingTransitionManager.swift */,
 				8566706221F5BF32000B480F /* DetailViewDismissingTransitionManager.swift */,
+				8566706921F626AF000B480F /* SwipeInteractionController.swift */,
 			);
 			path = Transitions;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 			files = (
 				853763D221EF4237003A1EEB /* Photo.swift in Sources */,
 				852C6BDA21F4943B00C927C3 /* UnsplashSearchResults.swift in Sources */,
+				8566706A21F626AF000B480F /* SwipeInteractionController.swift in Sources */,
 				853763CE21EF3D47003A1EEB /* NetworkManager.swift in Sources */,
 				85895B6D21F0657500B0A40B /* GreedoSizeCalculator.swift in Sources */,
 				853763CA21EF2F9D003A1EEB /* Router.swift in Sources */,

@@ -20,9 +20,11 @@ class PhotoDetailViewController: UIViewController {
     
     var photo: Photo!
     var originFrame: CGRect!
+    var swipeInteractionController: SwipeInteractionController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        swipeInteractionController = SwipeInteractionController(viewController: self)
         configureUI()
     }
     

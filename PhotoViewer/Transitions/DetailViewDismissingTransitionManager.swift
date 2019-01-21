@@ -11,9 +11,11 @@ import UIKit
 class DetailViewDismissingTransitionManager: NSObject, UIViewControllerAnimatedTransitioning {
     
     private let destinationFrame: CGRect
+    let interactionController: SwipeInteractionController?
     
-    init(destinationFrame: CGRect) {
+    init(destinationFrame: CGRect, interactionController: SwipeInteractionController?) {
         self.destinationFrame = destinationFrame
+        self.interactionController = interactionController
     }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
