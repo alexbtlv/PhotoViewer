@@ -27,7 +27,7 @@ extension User: Decodable {
         id = try userContainer.decode(String.self, forKey: .id)
         name = try userContainer.decode(String.self, forKey: .name)
         let profileImageURLS = try userContainer.decode([String:String].self, forKey: .profile_image)
-        guard let userPic = profileImageURLS["medium"], let url = URL(string: userPic) else {
+        guard let userPic = profileImageURLS["large"], let url = URL(string: userPic) else {
             throw DecodingError.missingImageURL
         }
         profileImageURL = url

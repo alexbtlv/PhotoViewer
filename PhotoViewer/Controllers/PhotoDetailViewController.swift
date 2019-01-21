@@ -19,6 +19,7 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet weak var authorImageView: UIImageView!
     
     var photo: Photo!
+    var originFrame: CGRect!
     
     override func viewDidLoad() {
         super.viewDidLoad()

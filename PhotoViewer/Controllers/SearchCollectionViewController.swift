@@ -12,11 +12,13 @@ class SearchCollectionViewController: UICollectionViewController {
     
     private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     private let reuseIdentifier = "PhotoCell"
+    private var originFrame: CGRect = CGRect.zero
     public var isLoadingList : Bool = false
     public var currentPage = 1
     public var currentQuery = ""
     lazy var networkManager = NetworkManager()
     public var photos = [Photo]()
+    private var selectedPhoto: Photo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,7 +161,13 @@ extension SearchCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let stb = UIStoryboard(name: "Main", bundle: Bundle.main)
         let photoDetailVC = stb.instantiateViewController(withIdentifier: "PhotoDetail") as! PhotoDetailViewController
-        photoDetailVC.photo = photos[indexPath.row]
+        let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+        let cellRect = attributes!.frame
+        originFrame = collectionView.convert(cellRect, to: view)
+        selectedPhoto = photos[indexPath.row]
+        photoDetailVC.transitioningDelegate = self
+        photoDetailVC.photo = selectedPhoto!
+        photoDetailVC.originFrame = originFrame
         present(photoDetailVC, animated: true, completion: nil)
     }
 }
@@ -189,7 +197,19 @@ extension SearchCollectionViewController {
         if ((scrollView.contentOffset.y + scrollView.frame.size.height - scrollOffsetToRequestAdditionalData) > scrollView.contentSize.height ) && !isLoadingList && !photos.isEmpty {
             currentPage += 1
             searchPhotosWith(currentQuery)
-            print("load more")
         }
+    }
+}
+
+// MARK: UIViewControllerTransitioningDelegate
+
+extension SearchCollectionViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let photo = selectedPhoto else { return nil }
+        return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DetailViewDismissingTransitionManager(destinationFrame: originFrame)
     }
 }

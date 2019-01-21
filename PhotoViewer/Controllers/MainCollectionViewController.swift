@@ -93,6 +93,7 @@ extension MainCollectionViewController {
         selectedPhoto = photos[indexPath.row]
         photoDetailVC.transitioningDelegate = self
         photoDetailVC.photo = photos[indexPath.row]
+        photoDetailVC.originFrame = originFrame
         present(photoDetailVC, animated: true, completion: nil)
     }
 }
@@ -115,5 +116,9 @@ extension MainCollectionViewController: UIViewControllerTransitioningDelegate {
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         guard let photo = selectedPhoto else { return nil }
         return DetailViewPresentingTransitionManager(originFrame: originFrame, photoAspectRatio: photo.aspectRatio)
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DetailViewDismissingTransitionManager(destinationFrame: originFrame)
     }
 }

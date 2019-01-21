@@ -19,7 +19,7 @@ class DetailViewPresentingTransitionManager: NSObject, UIViewControllerAnimatedT
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 0.75
+        return 0.5
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -56,6 +56,7 @@ class DetailViewPresentingTransitionManager: NSObject, UIViewControllerAnimatedT
         }) {_ in
             toVC.view.isHidden = false
             snapshot.removeFromSuperview()
+            photoSnapshot.removeFromSuperview()
             fromVC.view.layer.transform = CATransform3DIdentity
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
