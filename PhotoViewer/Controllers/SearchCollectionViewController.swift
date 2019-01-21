@@ -186,10 +186,13 @@ extension SearchCollectionViewController: UISearchBarDelegate {
             present(alert, animated: true, completion: nil)
             return
         }
-        photos = []
+        if query != currentQuery {
+            currentPage = 1
+            photos = []
+        }
+        currentQuery = query
         searchPhotosWith(query)
         resetSearchBar()
-        currentQuery = query
     }
 }
 
