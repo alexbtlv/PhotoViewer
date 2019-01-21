@@ -12,7 +12,7 @@ class MainCollectionViewController: UICollectionViewController {
     
     private let reuseIdentifier = "Cell"
     private let scrollOffsetToRequestAdditionalData: CGFloat = 100
-    
+    private var originFrame: CGRect = CGRect.zero
     lazy var networkManager = NetworkManager()
     private var currentPage = 1
     private var isLoadingList : Bool = false
@@ -86,6 +86,10 @@ extension MainCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let stb = UIStoryboard(name: "Main", bundle: Bundle.main)
         let photoDetailVC = stb.instantiateViewController(withIdentifier: "PhotoDetail") as! PhotoDetailViewController
+        let attributes = collectionView.layoutAttributesForItem(at: indexPath)
+        let cellRect = attributes!.frame
+        originFrame = collectionView.convert(cellRect, to: view)
+        photoDetailVC.transitioningDelegate = self
         photoDetailVC.photo = photos[indexPath.row]
         present(photoDetailVC, animated: true, completion: nil)
     }
@@ -99,5 +103,14 @@ extension MainCollectionViewController {
             currentPage += 1
             loadPhotos()
         }
+    }
+}
+
+
+// MARK: UIViewControllerTransitioningDelegate
+
+extension MainCollectionViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return DetailViewTransitionManager(originFrame: originFrame)
     }
 }

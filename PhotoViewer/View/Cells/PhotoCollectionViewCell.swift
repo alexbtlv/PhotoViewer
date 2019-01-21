@@ -24,4 +24,5 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         imageView.kf.setImage(with: photo.thumbURL)
         imageView.kf.indicatorType = .activity
     }
+    
 }

@@ -30,7 +30,6 @@ class PhotoDetailViewController: UIViewController {
     }
     
     fileprivate func configureUI() {
-        
         UIView.animate(withDuration: 0.5) {
             let width = self.view.bounds.width
             let height = width / self.photo.aspectRatio

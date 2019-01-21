@@ -36,8 +36,10 @@
 		853763D021EF3E5B003A1EEB /* UnsplashEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */; };
 		853763D221EF4237003A1EEB /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D121EF4237003A1EEB /* Photo.swift */; };
 		853763D521EF631D003A1EEB /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */; };
+		8566706121F59B46000B480F /* DetailViewTransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8566706021F59B46000B480F /* DetailViewTransitionManager.swift */; };
 		85895B6B21F05E9400B0A40B /* GreedoCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */; };
 		85895B6D21F0657500B0A40B /* GreedoSizeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */; };
+		85F86FDF21F4DAD4005C3D2D /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85F86FDE21F4DAD4005C3D2D /* GradientView.swift */; };
 		A66780ABD7465310DE5264F0 /* Pods_PhotoViewerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AB93B4654378018BDA1C0ED /* Pods_PhotoViewerTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -95,8 +97,10 @@
 		853763CF21EF3E5B003A1EEB /* UnsplashEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnsplashEndPoint.swift; sourceTree = "<group>"; };
 		853763D121EF4237003A1EEB /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		8566706021F59B46000B480F /* DetailViewTransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewTransitionManager.swift; sourceTree = "<group>"; };
 		85895B6A21F05E9400B0A40B /* GreedoCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoCollectionViewLayout.swift; sourceTree = "<group>"; };
 		85895B6C21F0657500B0A40B /* GreedoSizeCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreedoSizeCalculator.swift; sourceTree = "<group>"; };
+		85F86FDE21F4DAD4005C3D2D /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		CB8699168756E1FC97A211A9 /* Pods_PhotoViewer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA399019CA8626156B93302 /* Pods-PhotoViewerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoViewerUITests.release.xcconfig"; path = "Target Support Files/Pods-PhotoViewerUITests/Pods-PhotoViewerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		CD7D1F631465437EF48FEA8A /* Pods_PhotoViewerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoViewerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -150,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				850B446A21F1B883007E156E /* RoundedImageView.swift */,
+				85F86FDE21F4DAD4005C3D2D /* GradientView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -179,6 +184,7 @@
 		8537638121EF0673003A1EEB /* PhotoViewer */ = {
 			isa = PBXGroup;
 			children = (
+				8566705F21F59B0D000B480F /* Transitions */,
 				853763B621EF2C32003A1EEB /* Networking */,
 				853763B421EF1C58003A1EEB /* View */,
 				853763B321EF1C52003A1EEB /* Model */,
@@ -298,6 +304,14 @@
 				853763D421EF631D003A1EEB /* PhotoCollectionViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		8566705F21F59B0D000B480F /* Transitions */ = {
+			isa = PBXGroup;
+			children = (
+				8566706021F59B46000B480F /* DetailViewTransitionManager.swift */,
+			);
+			path = Transitions;
 			sourceTree = "<group>";
 		};
 		85895B6921F0583D00B0A40B /* GreedoLayout */ = {
@@ -559,9 +573,11 @@
 				850B446E21F1C008007E156E /* SearchCollectionViewController.swift in Sources */,
 				853763BF21EF2DDF003A1EEB /* JSONParameterEncoder.swift in Sources */,
 				853763C621EF2F5F003A1EEB /* HTTPTask.swift in Sources */,
+				8566706121F59B46000B480F /* DetailViewTransitionManager.swift in Sources */,
 				8537638321EF0673003A1EEB /* AppDelegate.swift in Sources */,
 				853763C421EF2F43003A1EEB /* HTTPMethod.swift in Sources */,
 				853763BD21EF2DC3003A1EEB /* URLParameterEncoder.swift in Sources */,
+				85F86FDF21F4DAD4005C3D2D /* GradientView.swift in Sources */,
 				853763C821EF2F75003A1EEB /* NetworkRouter.swift in Sources */,
 				853763D521EF631D003A1EEB /* PhotoCollectionViewCell.swift in Sources */,
 				85895B6B21F05E9400B0A40B /* GreedoCollectionViewLayout.swift in Sources */,
