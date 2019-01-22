@@ -46,7 +46,11 @@ class MainCollectionViewController: UICollectionViewController {
     fileprivate func configureUI() {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-        
+        guard let layout = collectionView.collectionViewLayout as? GreedoCollectionViewLayout else {
+            return
+        }
+        layout.dataSource = self
+        layout.invalidateLayout()
     }
     
     fileprivate func loadPhotos() {
@@ -144,5 +148,12 @@ extension MainCollectionViewController: UIViewControllerTransitioningDelegate {
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let animator = animator as? DetailViewDismissingTransitionManager, let interactionController = animator.interactionController, interactionController.interactionInProgress else { return nil }
         return interactionController
+    }
+}
+
+extension MainCollectionViewController: GreedoCollectionViewLayoutDataSource {
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize {
+        print(indexPath)
+        return photos.isEmpty ? CGSize.zero : photos[indexPath.row].size
     }
 }

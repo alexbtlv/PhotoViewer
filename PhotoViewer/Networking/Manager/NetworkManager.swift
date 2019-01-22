@@ -26,7 +26,7 @@ enum Result<String>{
 struct NetworkManager {
     private let router = Router<UnsplashApi>()
     
-    func getPopularPhotos(page: Int, offset: Int = 10, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
+    func getPopularPhotos(page: Int, offset: Int = 20, completion: @escaping (_ : [Photo]?,_ error: String?)->()) {
         router.request(.popularPhotos(page: page, offset: offset)) { data, response, error in
             if error != nil {
                 completion(nil, "Please check your network connection.")

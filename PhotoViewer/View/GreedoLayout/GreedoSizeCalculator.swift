@@ -50,14 +50,12 @@ class GreedoSizeCalculator: NSObject {
     }
     
     private func computeSize(atIndexPath indexPath: IndexPath) {
-        print(dataSource.debugDescription)
         var photoSize = dataSource.originalImageSize(atIndexPath: indexPath)
         if (photoSize.width < 1 || photoSize.height < 1) {
             // Photo with no height or width
             photoSize.width  = dataSource.rowMaximumHeight;
             photoSize.height = dataSource.rowMaximumHeight;
         }
-        
         leftOvers.append(photoSize)
         
         var enoughContentForTheRow = false
@@ -116,7 +114,7 @@ class GreedoSizeCalculator: NSObject {
                     newWidth = min(availableSpace, newWidth)
                 }
                 
-                // Add the size in the cache
+                // Add the size and row in the cache
                 sizeCache[lastIndexPathAdded] = CGSize(width: newWidth, height: rowHeight)
                 
                 availableSpace -= newWidth

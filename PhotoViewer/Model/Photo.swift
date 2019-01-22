@@ -27,6 +27,9 @@ public struct Photo {
     var aspectRatio: CGFloat {
         return CGFloat(width) / CGFloat(height)
     }
+    var size: CGSize {
+        return CGSize(width: width, height: height)
+    }
 }
 
 

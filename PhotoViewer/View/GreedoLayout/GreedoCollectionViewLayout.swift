@@ -8,14 +8,23 @@
 
 import UIKit
 
-public class GreedoCollectionViewLayout: UICollectionViewLayout {
+public protocol GreedoCollectionViewLayoutDataSource {
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize
+}
 
+public class GreedoCollectionViewLayout: UICollectionViewLayout {
     public var rowMaximumHeight: CGFloat = 50
-    public var fixedHeight: Bool = true
+    public var fixedHeight: Bool = false
     public var cellPadding: CGFloat = 5
     public var headerHeight: CGFloat = 0
+    public var dataSource: GreedoCollectionViewLayoutDataSource!
     
     private var cache = [UICollectionViewLayoutAttributes]()
+    private var greedo: GreedoSizeCalculator {
+        let g = GreedoSizeCalculator()
+        g.dataSource = self
+        return g
+    }
     private var height: CGFloat = 0
     private var width: CGFloat {
         let insets = collectionView!.contentInset
@@ -30,36 +39,32 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
         if cache.isEmpty {
             rowMaximumHeight = collectionView!.bounds.height / 5
             height = 10 + 10 + headerHeight
-            
-            var xOffsets: [CGFloat] = []
-            var yOffset: CGFloat = headerHeight > 0 ? headerHeight + cellPadding : 0
-            let columnWidth = width / 2.0
-            var col = 0
-            for col in 0..<2 {
-                let offset = col == 0 ? cellPadding : 0
-                xOffsets.append((CGFloat(col) * columnWidth) + offset)
-            }
         
+            var xOffset: CGFloat = 0
+            var yOffset: CGFloat = headerHeight > 0 ? headerHeight + cellPadding : 0
+            
             // cell attributes
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
-                let rowHeight = rowMaximumHeight
-                let width = columnWidth - cellPadding - cellPadding / 2
-                var xOffset = xOffsets[col]
-                if col > 0 {
-                    xOffset += cellPadding / 2
-                }
-                let frame = CGRect(x: xOffset, y: yOffset, width: width, height: rowHeight)
+                let size = greedo.sizeForPhoto(at: indexPath)
+                let frame = CGRect(x: xOffset, y: yOffset, width: size.width, height: size.height)
                 let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
                 attributes.frame = frame
                 cache.append(attributes)
-                if col >= 1 {
-                    col = 0
-                    yOffset += rowHeight + cellPadding
-                    height += rowHeight
-                } else {
-                    col += 1
-                }
+                
+//                if item < collectionView!.numberOfItems(inSection: 0) {
+//                    let nextSize = greedo.sizeForPhoto(at: IndexPath(item: indexPath.item + 1, section: indexPath.section))
+//                    if xOffset + size.width + cellPadding + nextSize.width < width { // keep adding photos to the row
+//                        xOffset += size.width + cellPadding
+//                    } else { // update row
+//                        xOffset = 0
+//                        yOffset += size.height + cellPadding
+//                        height += size.height + cellPadding
+//                    }
+//                }
+                
+//                let rowHeight = rowMaximumHeight
+//                let width = columnWidth - cellPadding - cellPadding / 2
             }
             
             // header attributes
@@ -68,9 +73,9 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
                 attributes.frame = CGRect(x: 0, y: -150, width: width, height: headerHeight + 150)
                 cache.append(attributes)
             }
-            collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 50, right: 0)
+            collectionView?.contentInset = UIEdgeInsets(top: 10, left: cellPadding, bottom: 50, right: cellPadding)
             if headerHeight > 0 {
-                collectionView?.contentInset.bottom += 50
+                collectionView?.contentInset.bottom += 100
             }
         }
     }
@@ -97,5 +102,19 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
     public override func invalidateLayout() {
         super.invalidateLayout()
         cache = []
+    }
+}
+
+extension GreedoCollectionViewLayout: GreedoSizeCalculatorDataSource {
+    var contentWidth: CGFloat {
+        return width
+    }
+    
+    var interItemSpacing: CGFloat {
+        return cellPadding
+    }
+    
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize {
+        return dataSource.originalImageSize(atIndexPath: indexPath)
     }
 }
