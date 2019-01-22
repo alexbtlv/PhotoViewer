@@ -10,9 +10,9 @@ A simple iOS App to explore Unsplash API
 ## Instal
 
 - Clone repo
-- run `pod install`
-– Cocoapods will ask you to provide UnsplashAccessKey.
-– Build and run
+- run `pod install` 
+- Cocoapods will ask you to provide UnsplashAccessKey. 
+- Build and run 
 
 
 ## Requirements
