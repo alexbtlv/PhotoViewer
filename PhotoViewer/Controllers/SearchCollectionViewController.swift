@@ -11,13 +11,15 @@ import MBProgressHUD
 
 class SearchCollectionViewController: UICollectionViewController {
     
+    // MARK: Private variables
+    
     private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     private let reuseIdentifier = "PhotoCell"
     private var originFrame: CGRect = CGRect.zero
-    public var currentPage = 1
-    public var currentQuery = ""
-    lazy var networkManager = NetworkManager()
-    public var photos = [Photo]()
+    private var currentPage = 1
+    private var currentQuery = ""
+    lazy private var networkManager = NetworkManager()
+    private var photos = [Photo]()
     private var selectedPhoto: Photo?
     private var selectedIndexPath: IndexPath?
     private var isLoadingList : Bool = false {
@@ -29,6 +31,8 @@ class SearchCollectionViewController: UICollectionViewController {
             }
         }
     }
+    
+    // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +51,14 @@ class SearchCollectionViewController: UICollectionViewController {
         }
         layout.invalidateLayout()
     }
+    
+    fileprivate func resetSearchBar() {
+        guard let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as? SearchCollectionHeaderView else { return }
+        header.searchBar.text = ""
+        header.searchBar.resignFirstResponder()
+    }
+    
+    // MARK: Configure UI
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -72,12 +84,6 @@ class SearchCollectionViewController: UICollectionViewController {
     
     @objc func singleTap(sender: UITapGestureRecognizer) {
         resetSearchBar()
-    }
-    
-    fileprivate func resetSearchBar() {
-        guard let header = collectionView.supplementaryView(forElementKind: UICollectionView.elementKindSectionHeader, at: IndexPath(row: 0, section: 0)) as? SearchCollectionHeaderView else { return }
-        header.searchBar.text = ""
-        header.searchBar.resignFirstResponder()
     }
     
     fileprivate func searchPhotosWith(_ query: String) {
@@ -186,10 +192,12 @@ extension SearchCollectionViewController: UISearchBarDelegate {
             present(alert, animated: true, completion: nil)
             return
         }
+        
         if query != currentQuery {
             currentPage = 1
             photos = []
         }
+        
         currentQuery = query
         searchPhotosWith(query)
         resetSearchBar()

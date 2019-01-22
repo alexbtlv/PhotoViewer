@@ -11,6 +11,8 @@ import MBProgressHUD
 
 class MainCollectionViewController: UICollectionViewController {
     
+    // MARK: Private variables
+    
     private let reuseIdentifier = "Cell"
     private let scrollOffsetToRequestAdditionalData: CGFloat = 100
     private var originFrame: CGRect = CGRect.zero
@@ -28,6 +30,8 @@ class MainCollectionViewController: UICollectionViewController {
     private var photos = [Photo]()
     private var selectedPhoto: Photo?
     private var selectedIndexPath: IndexPath?
+    
+    // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()

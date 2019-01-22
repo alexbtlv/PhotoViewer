@@ -98,6 +98,7 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://unsplash.com/photos/somePhotoId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="KAy-xH-yhr">
                                         <rect key="frame" x="76" y="29" width="306" height="18"/>
+                                        <gestureRecognizers/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -116,6 +117,9 @@
                                     <constraint firstAttribute="trailing" secondItem="KAy-xH-yhr" secondAttribute="trailing" id="oc6-u9-T5v"/>
                                     <constraint firstAttribute="bottom" secondItem="KAy-xH-yhr" secondAttribute="bottom" constant="13" id="xQk-8l-e0Y"/>
                                 </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="oMv-2t-Ouw" appends="YES" id="ke0-a7-8Hk"/>
+                                </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNo-yl-Oae">
                                 <rect key="frame" x="359" y="44" width="39" height="30"/>
@@ -158,6 +162,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a4M-61-uYu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="oMv-2t-Ouw">
+                    <connections>
+                        <action selector="sourceTapDidRecognized:" destination="LLk-PS-VjM" id="408-zp-leH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="3640.8000000000002" y="-36.431784107946029"/>
         </scene>

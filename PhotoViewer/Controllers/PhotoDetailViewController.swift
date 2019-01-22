@@ -11,6 +11,8 @@ import Kingfisher
 
 class PhotoDetailViewController: UIViewController {
 
+    // MARK: Outlets
+    
     @IBOutlet weak var imageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageView: UIImageView!
@@ -18,9 +20,13 @@ class PhotoDetailViewController: UIViewController {
     @IBOutlet weak var sourceLabel: UILabel!
     @IBOutlet weak var authorImageView: UIImageView!
     
-    var photo: Photo!
-    var originFrame: CGRect!
-    var swipeInteractionController: SwipeInteractionController?
+    // MARK: Public variables
+    
+    public var photo: Photo!
+    public var originFrame: CGRect!
+    public var swipeInteractionController: SwipeInteractionController?
+    
+    // MARK: View Controller Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,5 +64,11 @@ class PhotoDetailViewController: UIViewController {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func sourceTapDidRecognized(_ sender: Any) {
+        if let source = photo.source, let url = URL(string: source) {
+            UIApplication.shared.open(url)
+        }
     }
 }
