@@ -62,6 +62,7 @@ class MainCollectionViewController: UICollectionViewController {
                         let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
                         alert.addAction(okAction)
                         self.isLoadingList = false
+                        self.currentPage = 1
                         self.present(alert, animated: true, completion: nil)
                     }
                 }

@@ -33,13 +33,11 @@ class PhotoDetailViewController: UIViewController {
     }
     
     fileprivate func configureUI() {
-        UIView.animate(withDuration: 0.5) {
-            let width = self.view.bounds.width
-            let height = width / self.photo.aspectRatio
-            self.imageViewHeightConstraint.constant = height
-            self.imageViewWidthConstraint.constant = width
-            self.view.layoutIfNeeded()
-        }
+        let width = self.view.bounds.width
+        let height = width / self.photo.aspectRatio
+        self.imageViewHeightConstraint.constant = height
+        self.imageViewWidthConstraint.constant = width
+        self.view.layoutIfNeeded()
         imageView.kf.indicatorType = .activity
         ImageCache.default.retrieveImage(forKey: photo.thumbURL.absoluteString) { result in
             switch result {

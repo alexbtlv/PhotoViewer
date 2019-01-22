@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="UGb-Qc-vpH">
-    <device id="retina6_5" orientation="landscape">
+    <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,13 +15,13 @@
             <objects>
                 <collectionViewController id="Cnb-vd-BNW" customClass="MainCollectionViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="qaH-iT-Jhq">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewLayout key="collectionViewLayout" id="fIT-Wd-dJj" customClass="GreedoCollectionViewLayout" customModule="PhotoViewer" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="xjO-rm-E78" customClass="PhotoCollectionViewCell" customModule="PhotoViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
+                                <rect key="frame" x="80" y="0.0" width="254" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
@@ -61,22 +61,22 @@
             <objects>
                 <viewController storyboardIdentifier="PhotoDetail" id="LLk-PS-VjM" customClass="PhotoDetailViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uBV-3A-jno">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BsV-ww-bvx">
-                                <rect key="frame" x="44" y="123.66666666666669" width="808" height="167"/>
+                                <rect key="frame" x="0.0" y="364.66666666666669" width="414" height="167.00000000000006"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="167" id="71k-lb-K5E"/>
                                     <constraint firstAttribute="width" priority="750" constant="375" id="ftS-AF-K0T"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Mm-zH-rDv" customClass="GradientView" customModule="PhotoViewer" customModuleProvider="target">
-                                <rect key="frame" x="44" y="300.66666666666669" width="808" height="80"/>
+                                <rect key="frame" x="0.0" y="541.66666666666663" width="414" height="80"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rbb-jO-ZEw">
-                                <rect key="frame" x="60" y="320.66666666666669" width="776" height="60"/>
+                                <rect key="frame" x="16" y="561.66666666666663" width="382" height="60"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CZP-pz-MZd" customClass="RoundedImageView" customModule="PhotoViewer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -91,13 +91,13 @@
                                         </userDefinedRuntimeAttributes>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeY-r5-slK">
-                                        <rect key="frame" x="76" y="0.0" width="700" height="21"/>
+                                        <rect key="frame" x="76" y="0.0" width="306" height="21"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="https://unsplash.com/photos/somePhotoId" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="KAy-xH-yhr">
-                                        <rect key="frame" x="76" y="29" width="700" height="18"/>
+                                        <rect key="frame" x="76" y="29" width="306" height="18"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
                                         <color key="textColor" cocoaTouchSystemColor="lightTextColor"/>
                                         <nil key="highlightedColor"/>
@@ -118,7 +118,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qNo-yl-Oae">
-                                <rect key="frame" x="797" y="0.0" width="39" height="30"/>
+                                <rect key="frame" x="359" y="44" width="39" height="30"/>
                                 <state key="normal" title="Close">
                                     <color key="titleColor" cocoaTouchSystemColor="lightTextColor"/>
                                 </state>
@@ -166,7 +166,7 @@
             <objects>
                 <collectionViewController id="n9b-KZ-b2g" customClass="SearchCollectionViewController" customModule="PhotoViewer" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" id="PvW-04-VJp">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="414"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
@@ -174,7 +174,7 @@
                         <collectionViewLayout key="collectionViewLayout" id="7bP-md-qjD" customClass="GreedoCollectionViewLayout" customModule="PhotoViewer" customModuleProvider="target"/>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="gUW-8O-g8b" customClass="PhotoCollectionViewCell" customModule="PhotoViewer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
+                                <rect key="frame" x="80" y="0.0" width="254" height="157"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="254" height="157"/>
@@ -216,7 +216,7 @@
                     <tabBarItem key="tabBarItem" systemItem="topRated" id="LFk-Qm-OyU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="hGt-h2-6rP">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -254,7 +254,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="Suy-VZ-FaK"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ld0-zh-2rz">
-                        <rect key="frame" x="0.0" y="0.0" width="896" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
