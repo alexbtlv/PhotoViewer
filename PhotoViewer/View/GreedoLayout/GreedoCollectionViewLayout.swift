@@ -9,7 +9,7 @@
 import UIKit
 
 public protocol GreedoCollectionViewLayoutDataSource {
-    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize?
 }
 
 public class GreedoCollectionViewLayout: UICollectionViewLayout {
@@ -42,29 +42,35 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
         
             var xOffset: CGFloat = 0
             var yOffset: CGFloat = headerHeight > 0 ? headerHeight + cellPadding : 0
+            var rowCache = [IndexPath:(origin: CGPoint, size: CGSize)]()
             
             // cell attributes
             for item in 0..<collectionView!.numberOfItems(inSection: 0) {
                 let indexPath = IndexPath(item: item, section: 0)
-                let size = greedo.sizeForPhoto(at: indexPath)
-                let frame = CGRect(x: xOffset, y: yOffset, width: size.width, height: size.height)
-                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-                attributes.frame = frame
-                cache.append(attributes)
+                guard let size = greedo.sizeForPhoto(at: indexPath) else { continue }
                 
-//                if item < collectionView!.numberOfItems(inSection: 0) {
-//                    let nextSize = greedo.sizeForPhoto(at: IndexPath(item: indexPath.item + 1, section: indexPath.section))
-//                    if xOffset + size.width + cellPadding + nextSize.width < width { // keep adding photos to the row
-//                        xOffset += size.width + cellPadding
-//                    } else { // update row
-//                        xOffset = 0
-//                        yOffset += size.height + cellPadding
-//                        height += size.height + cellPadding
-//                    }
-//                }
-                
-//                let rowHeight = rowMaximumHeight
-//                let width = columnWidth - cellPadding - cellPadding / 2
+                if let nextSize = greedo.sizeForPhoto(at: IndexPath(item: indexPath.item + 1, section: indexPath.section)) {
+                    if xOffset + nextSize.width < width { // keep adding photos to the row
+                        let origin = CGPoint(x: xOffset, y: yOffset)
+                        rowCache[indexPath] = (origin: origin, size: size)
+                        
+                        xOffset += size.width + cellPadding
+                    } else {
+                        // calculate current row attributes
+                        for (i, e) in rowCache {
+                            let frame = CGRect(x: e.origin.x, y: e.origin.y, width: e.size.width, height: e.size.height)
+                            let attributes = UICollectionViewLayoutAttributes(forCellWith: i)
+                            attributes.frame = frame
+                            cache.append(attributes)
+                        }
+                        
+                        // update row
+                        rowCache.removeAll()
+                        xOffset = 0
+                        yOffset += size.height + cellPadding
+                        height += size.height + cellPadding
+                    }
+                }
             }
             
             // header attributes
@@ -114,7 +120,7 @@ extension GreedoCollectionViewLayout: GreedoSizeCalculatorDataSource {
         return cellPadding
     }
     
-    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize {
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize? {
         return dataSource.originalImageSize(atIndexPath: indexPath)
     }
 }

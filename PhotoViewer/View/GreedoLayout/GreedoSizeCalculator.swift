@@ -13,7 +13,7 @@ protocol GreedoSizeCalculatorDataSource {
     var rowMaximumHeight: CGFloat { get  }
     var fixedHeight: Bool { get }
     var interItemSpacing: CGFloat { get }
-    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize?
 }
 
 
@@ -24,7 +24,7 @@ class GreedoSizeCalculator: NSObject {
     private var leftOvers = [CGSize]()
     private var lastIndexPathAdded: IndexPath!
     
-    func sizeForPhoto(at indexPath: IndexPath) -> CGSize {
+    func sizeForPhoto(at indexPath: IndexPath) -> CGSize? {
         if sizeCache[indexPath] == nil {
             lastIndexPathAdded = indexPath
             computeSize(atIndexPath: indexPath)
@@ -50,7 +50,7 @@ class GreedoSizeCalculator: NSObject {
     }
     
     private func computeSize(atIndexPath indexPath: IndexPath) {
-        var photoSize = dataSource.originalImageSize(atIndexPath: indexPath)
+        var photoSize = dataSource.originalImageSize(atIndexPath: indexPath) ?? CGSize.zero
         if (photoSize.width < 1 || photoSize.height < 1) {
             // Photo with no height or width
             photoSize.width  = dataSource.rowMaximumHeight;

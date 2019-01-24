@@ -152,8 +152,7 @@ extension MainCollectionViewController: UIViewControllerTransitioningDelegate {
 }
 
 extension MainCollectionViewController: GreedoCollectionViewLayoutDataSource {
-    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize {
-        print(indexPath)
-        return photos.isEmpty ? CGSize.zero : photos[indexPath.row].size
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize? {
+        return indexPath.row > photos.count - 1 ? nil : photos[indexPath.row].size
     }
 }
