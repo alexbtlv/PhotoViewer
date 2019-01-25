@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import AVFoundation
 
 public protocol GreedoCollectionViewLayoutDataSource {
     func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize?
 }
 
 public class GreedoCollectionViewLayout: UICollectionViewLayout {
-    public var rowMaximumHeight: CGFloat = 50
+    public var rowMaximumHeight: CGFloat = 500
     public var fixedHeight: Bool = false
     public var cellPadding: CGFloat = 5
     public var headerHeight: CGFloat = 0
@@ -57,18 +58,40 @@ public class GreedoCollectionViewLayout: UICollectionViewLayout {
                         xOffset += size.width + cellPadding
                     } else {
                         // calculate current row attributes
+                        // https://math.stackexchange.com/questions/394911/scale-rectangles-so-they-have-same-height-and-dont-exceed-a-total-width
+                        var rowSize = CGSize(width: 0, height: rowMaximumHeight)
+                        for (_, e) in rowCache {
+                            let photoScaledToMaxHeigth = AVMakeRect(aspectRatio: e.size, insideRect: CGRect(x: 0, y: 0, width: width , height: rowMaximumHeight))
+                            rowSize.width += photoScaledToMaxHeigth.width
+                        }
+                        rowSize.width += CGFloat(rowCache.count - 1) * cellPadding
+                        let x = AVMakeRect(aspectRatio: rowSize, insideRect: CGRect(x: 0, y: 0, width: width, height: rowMaximumHeight))
+                        xOffset = 0
                         for (i, e) in rowCache {
-                            let frame = CGRect(x: e.origin.x, y: e.origin.y, width: e.size.width, height: e.size.height)
+                            var scale: CGFloat = 0
+                            if rowCache.count == 1 {
+                                scale = e.size.width / width
+                            } else {
+                                scale = e.size.height / x.height
+                            }
+                            let newHight = e.size.height / scale
+                            var newWidth = e.size.width / scale
+                            rowSize.height = newHight
+                            newWidth -= xOffset > 0 ? cellPadding : 0
+                            let frame = CGRect(x: xOffset, y: yOffset, width: newWidth , height: newHight)
+                            
                             let attributes = UICollectionViewLayoutAttributes(forCellWith: i)
                             attributes.frame = frame
                             cache.append(attributes)
+                            
+                            xOffset += cellPadding + newWidth
                         }
                         
                         // update row
                         rowCache.removeAll()
                         xOffset = 0
-                        yOffset += size.height + cellPadding
-                        height += size.height + cellPadding
+                        yOffset += rowSize.height + cellPadding
+                        height += rowSize.height + cellPadding
                     }
                 }
             }

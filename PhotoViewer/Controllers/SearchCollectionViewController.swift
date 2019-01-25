@@ -56,6 +56,7 @@ class SearchCollectionViewController: UICollectionViewController {
         guard let layout = collectionView.collectionViewLayout as? GreedoCollectionViewLayout else {
             return
         }
+        layout.dataSource = self
         layout.headerHeight = view.bounds.height / 3
         let headerNib = UINib(nibName: "SearchHeader", bundle: Bundle.main)
         collectionView.register(headerNib, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "Header")
@@ -225,5 +226,12 @@ extension SearchCollectionViewController: UIViewControllerTransitioningDelegate 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let animator = animator as? DetailViewDismissingTransitionManager, let interactionController = animator.interactionController, interactionController.interactionInProgress else { return nil }
         return interactionController
+    }
+}
+
+
+extension SearchCollectionViewController: GreedoCollectionViewLayoutDataSource {
+    func originalImageSize(atIndexPath indexPath: IndexPath) -> CGSize? {
+        return indexPath.row > photos.count - 1 ? nil : photos[indexPath.row].size
     }
 }
